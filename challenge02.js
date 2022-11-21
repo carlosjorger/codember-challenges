@@ -1,23 +1,21 @@
 function decrypt(code) {
-    var currentLetter=0
-    var result=""
-    while (currentLetter<code.length) {
-        var lengthOfAncii=1;
-        function getAncii(length=lengthOfAncii) {
-            var result=code.slice(currentLetter,currentLetter+length)
-            return result==' '?'32':result;
+    var currentLetter = 0
+    var result = ""
+    while (currentLetter < code.length) {
+        var lengthOfAncii = 1;
+        var anciiString = ''
+        for (lengthOfAncii = 1; lengthOfAncii <= 3; lengthOfAncii++) {
+            var anciiString = code
+                .slice(currentLetter, currentLetter + lengthOfAncii)
+                .replace(' ', '32')
+            if (anciiString == 32
+                || anciiString >= 97 
+                && anciiString <= 122) {
+                break;
+            }
         }
-        if(getAncii(lengthOfAncii)==32){
-            console.log(lengthOfAncii)
-        }
-        else if(getAncii(2)>=97 &&getAncii(2)<=122){
-            lengthOfAncii=2
-        }
-        else{
-            lengthOfAncii=3
-        }
-        result+= String.fromCharCode(getAncii())
-        currentLetter+=lengthOfAncii
+        result += String.fromCharCode(anciiString)
+        currentLetter += lengthOfAncii
     }
     return result
 }
