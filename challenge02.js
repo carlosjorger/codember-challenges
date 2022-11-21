@@ -2,20 +2,22 @@ function decrypt(code) {
     var currentLetter=0
     var result=""
     while (currentLetter<code.length) {
-        if(code.slice(currentLetter,currentLetter+1)==' '){
-            result+=' '
-            currentLetter++;
-            continue
+        var lengthOfAncii=1;
+        function getAncii(length=lengthOfAncii) {
+            var result=code.slice(currentLetter,currentLetter+length)
+            return result==' '?'32':result;
         }
-        var tempAncii=code.slice(currentLetter,currentLetter+2)
-        if (parseInt(tempAncii)>=97 &&parseInt(tempAncii)<=122) {
-            result+= String.fromCharCode(parseInt(tempAncii))
+        if(getAncii(lengthOfAncii)==32){
+            console.log(lengthOfAncii)
         }
-        else {
-            tempAncii=code.slice(currentLetter,currentLetter+3)
-            result+= String.fromCharCode(parseInt(tempAncii))
+        else if(getAncii(2)>=97 &&getAncii(2)<=122){
+            lengthOfAncii=2
         }
-        currentLetter+=tempAncii.length
+        else{
+            lengthOfAncii=3
+        }
+        result+= String.fromCharCode(getAncii())
+        currentLetter+=lengthOfAncii
     }
     return result
 }
