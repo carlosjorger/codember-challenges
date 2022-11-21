@@ -29,7 +29,7 @@ function verify_usersString(usersString) {
     }
     return `${validUsers}${lastValidUser}`
 }
-verify_users()
+// verify_users()
 
 module.exports = verify_usersString;
 
